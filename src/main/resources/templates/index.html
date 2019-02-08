@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mega Theater Network</title>
+
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h1>Сегодня в кинотеатрах Москвы</h1>
+
+                    <div class="example-2 card col-md-3" th:each="movie : ${movies}">
+                        <div class="wrapper"
+                             th:style="'background: url(' + ${movie.image} + ') center/cover no-repeat;'">
+                            <div class="header">
+                                <div class="date">
+                                    <span class="day">12</span>
+                                    <span class="month">Aug</span>
+                                    <span class="year" th:utext="${movie.release}"></span>
+                                </div>
+                                <ul class="menu-content">
+                                    <li>
+                                        <a href="#" class="fa fa-bookmark-o"></a>
+                                    </li>
+                                    <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+                                    <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="data">
+                                <div class="content">
+                                    <span class="author" th:utext="${movie.director}"></span>
+                                    <h4 class="title"><a th:href="@{'/movie/' + ${movie.id}}" href="#"
+                                                         th:utext="${movie.title}"></a>
+                                    </h4>
+                                    <p class="text" th:utext="${#strings.substring(movie.descr,0,99)}"></p>
+                                    <a href="#" class="button">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+
+</body>
+</html>

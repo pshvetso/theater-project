@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Кинотеатры Нижнего Новгорода - Mega Theater Network</title>
+
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+
+    <script defer src="/js/movie.js"></script>
+
+</head>
+<body>
+
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h1>Кинотеатры Нижнего Новгорода</h1>
+
+                    <div class="row" th:each="theater : ${theaters}">
+                        <div class="card mb-3">
+                            <img class="card-img-top" th:src="${theater.image}" th:alt="${theater.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a th:href="@{'/theater/' + ${theater.id}}" href="#"
+                                       th:utext="${theater.title}"></a>
+                                </h5>
+                                <p class="card-text" th:text="${theater.descr}"></p>
+                                <p class="card-text">
+                                    <small class="text-muted" th:text="${theater.address}"></small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="my-2">
+                            <script type="text/javascript" charset="utf-8" async
+                                    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af1894c565b2b63167ef0ca56be0bbeceeb0457a315bb488c238a28a1d2282b5c&amp;width=600&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="my-2">
+                            <img src="/img/mastercard-promo.png"
+                                 alt="Скидка 10% на билеты при оплате картой Mastercard"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+
+</body>
+</html>

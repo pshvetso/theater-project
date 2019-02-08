@@ -1,0 +1,82 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* Location of the image */
+    background-image: url(/img/branding.png);
+
+    /* Background image is centered vertically and horizontally at all times */
+    background-position-x: center;
+    background-position-y: 52px;
+
+    /* Background image doesn't tile */
+    background-repeat: no-repeat;
+
+    /* Background image is scrolling */
+    background-attachment: scroll;
+
+    /* Set a background color that will be displayed
+       while the background image is loading */
+    background-color: #eee;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+}
+
+.container > .row {
+    max-width: 1100px;
+    margin: 250px auto 0;
+}
+
+footer.page-footer {
+    bottom: 0;
+    color: #fff;
+}
+
+.blue {
+    background-color: #2196f3 !important;
+}
+
+footer.page-footer {
+    color: #fff;
+}
+
+footer.page-footer a {
+    color: #fff;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.session {
+    float: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.session-body {
+    font-size: 14px;
+}
+
+.session-body p {
+    margin-bottom: 0;
+}
+
+.card {
+    flex-direction: row;
+}
+
+.movie-schedule .card {
+    background-color: inherit;
+}

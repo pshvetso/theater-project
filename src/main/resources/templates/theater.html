@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${theater.title} + ' - Расписание - Mega Theater Network'"></title>
+
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+
+    <script defer src="/js/schedule.js"></script>
+
+</head>
+<body>
+
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="card mb-3">
+                            <img class="card-img-top" th:src="${theater.image}" th:alt="${theater.title}">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${theater.title}"></h5>
+                                <p class="card-text" th:text="${theater.descr}"></p>
+                                <p class="card-text">
+                                    <small class="text-muted" th:text="${theater.address}"></small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="btn-group my-sm-4" id="schedule-select" data-rest="/theater-sessions"
+                         data-th-attr="data-page-id=${theater.id}">
+                        <button type="button" class="btn btn-secondary btn-lg">Расписание на cегодня</button>
+                        <button type="button" class="btn btn-success btn-lg dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" data-btn-text="Расписание на сегодня" id="0">Сегодня</a>
+                            <a class="dropdown-item" data-btn-text="Расписание на завтра" id="1">Завтра</a>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5 movie-schedule" th:each="movie : ${movies}"
+                         data-th-attr="data-sub-id=${movie.id}">
+                        <div class="card col-md-12">
+                            <img class="card-img-top" th:src="${movie.image}" th:alt="${movie.title}"
+                                 style="width: 120px;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a th:href="@{'/movie/' + ${movie.id}}" href="#"
+                                       th:utext="${movie.title}"></a>
+                                </h5>
+                                <p class="card-text" th:text="${movie.genre}"></p>
+                                <p class="card-text">
+                                    <small class="text-muted" th:text="${{movie.time}}"></small>
+                                </p>
+                            </div>
+                            <div id="sessions">
+                                <div class="session" th:each="ses : ${sessions.get(movie.id)}">
+                                    <div class="session-body">
+                                        <button type="button"
+                                                th:class="'btn btn' + ((${ses.seats.size()} == 0) ? '-outline' : '') + '-primary mr-sm-2 my-1'"
+                                                th:text="${#temporals.format(ses.time, 'HH:mm')}"
+                                                data-th-attr="data-session=${ses.id}"></button>
+                                        <p class="card-text" th:text="'от ' + ${ses.price} + ' р.'"></p>
+                                        <p class="card-text" th:text="${ses.hall.title}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+
+</body>
+</html>
